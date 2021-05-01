@@ -32,13 +32,13 @@ void setup()
     mySerial.begin(9600);
     delay(500);
     //mp3_set_volume(25);
-    mp3_set_volume(25);
+    mp3_set_volume(30);
     //mp3_set_volume(10);
     delay(100); 
     
      mp3_play_track(17);  // 17. Bíll í gang (gamli bíllinn)
      delay(5000); 
-     mp3_play_track(1);     // 1. Riding along in my automobile 
+     mp3_play_track(19);     // 1. Riding along in my automobile 
      lagNr=2;
      //Timar
      time=millis();         //Setur time breytuna á tíma liðinn frá starti
@@ -63,16 +63,19 @@ void loop()
     delay(100);
     if(digitalRead(RXspilari_)==1) //Ef Spilari upptekinn þá er RXspilari==0
     {                              //RXspilari (D2) tengist BUSY tengi á spilara sjá mynd 17
-      if(lagNr==17)
+      if(lagNr==20)
          lagNr=1;
       mp3_play_track(lagNr++);   
     }
 
    if(lengd()<40)
    {
+      mp3_play_track(20);  
       stopCar();        
       //breakCar();
       delay(300);
+      mp3_play_track(19);
+      delay(300);  
       reiknaPulsBreidd(90,-1);
       haegri = lengd();
       //Serial.println(haegri);
