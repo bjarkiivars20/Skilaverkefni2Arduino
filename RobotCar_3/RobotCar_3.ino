@@ -50,11 +50,8 @@ void setup()
 //*************************** Keyrslulykkjan **********************
 void loop()
 {  
-    double haegri = 0;
-    double vinstri = 0;
-
-    //double fyrstaLengd = 0;
-    //double onnurLengd = 0;
+    double haegri = 0; //Breyta sem heldur utan um lengd þegar hann skannar til haegri
+    double vinstri = 0; //Breyta sem heldur utan um lengd þegar hann skannnar til vinstri
     
     reiknaPulsBreidd(0,-1); //SONAR beint framm, í þessum bíl er leiðrétt um +2°
     delay(100);    
