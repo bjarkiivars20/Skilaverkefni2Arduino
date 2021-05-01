@@ -11,7 +11,6 @@
 #include <SoftwareSerial.h>
 #include "MyDFPlayer.h"
 
-
 //************************** uppsetning á forritinu *****************
 void setup() 
 { 
@@ -33,7 +32,7 @@ void setup()
     mySerial.begin(9600);
     delay(500);
     //mp3_set_volume(25);
-    mp3_set_volume(20);
+    mp3_set_volume(25);
     //mp3_set_volume(10);
     delay(100); 
     
@@ -53,10 +52,14 @@ void loop()
 {  
     double haegri = 0;
     double vinstri = 0;
+
+    //double fyrstaLengd = 0;
+    //double onnurLengd = 0;
     
     reiknaPulsBreidd(0,-1); //SONAR beint framm, í þessum bíl er leiðrétt um +2°
     delay(100);    
     startCar(); // Bíll keyrir áfram
+    Serial.println(lengd());
     delay(100);
     if(digitalRead(RXspilari_)==1) //Ef Spilari upptekinn þá er RXspilari==0
     {                              //RXspilari (D2) tengist BUSY tengi á spilara sjá mynd 17
@@ -66,8 +69,9 @@ void loop()
     }
 
    if(lengd()<40)
-   {  
-      stopCar();
+   {
+      stopCar();        
+      //breakCar();
       delay(300);
       reiknaPulsBreidd(90,-1);
       haegri = lengd();
@@ -86,29 +90,18 @@ void loop()
         delay(300);
         driveLeft();
         delay(300);
-        driveLeft();  
+        driveLeft(); 
       } else if(haegri > vinstri) {
         delay(1000);
+        backCar();
+        delay(300);
         backCar();
         delay(300);
         driveRight();
         delay(300);
         driveRight();
-      }
-      //startCar();
-      //delay(1000);
-    /*   
-     *    
-     *    
-      stopCar();        
-      if(randomTurn==1)
-         driveRight(); // bíll snýst til hægri
-      else if (randomTurn==-1)
-         driveLeft();  // bíll snýst til binstri
-      delay(300);      // Gefa tíma til að beygja ca +/- 90°
-      startCar();  
-      randomTurn=randomTurn*-1;    
-      delay(1000);      */         
+      } 
+      startCar();    
    }
 
 }//End of loop *********************

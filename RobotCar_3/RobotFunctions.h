@@ -132,3 +132,11 @@ void driveRight()
     analogWrite(motorVpwm_,VgrunnV);
     analogWrite(motorHpwm_,VgrunnH);  
 }
+/*
+void erFastur(double lengdFrom) {
+  double whatIsDistance = lengdFrom;
+
+  if
+
+  
+}*/
