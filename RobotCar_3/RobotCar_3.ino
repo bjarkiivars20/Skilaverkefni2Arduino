@@ -10,10 +10,16 @@
 #include "RobotFunctions.h"
 #include <SoftwareSerial.h>
 #include "MyDFPlayer.h"
+int ledPin1 = 3;
+int LED1 = 0;
+unsigned long time1;
 
 //************************** uppsetning á forritinu *****************
 void setup() 
 { 
+
+    pinMode(ledPin1, OUTPUT); //Fyrir rauðu díóðuna
+    
     pinMode(motorVpwm_,OUTPUT);
     pinMode(motorVgir_,OUTPUT);
     pinMode(motorHpwm_,OUTPUT);
@@ -36,9 +42,9 @@ void setup()
     //mp3_set_volume(10);
     delay(100); 
     
-     mp3_play_track(17);  // 17. Bíll í gang (gamli bíllinn)
-     delay(5000); 
-     mp3_play_track(19);     // 1. Riding along in my automobile 
+    /* mp3_play_track(17);  // 17. Bíll í gang (gamli bíllinn)
+     delay(5000); */
+     mp3_play_track(19);     // Monkey island intro
      lagNr=2;
      //Timar
      time=millis();         //Setur time breytuna á tíma liðinn frá starti
@@ -65,22 +71,22 @@ void loop()
       mp3_play_track(lagNr++);   
     }
 
+
    if(lengd()<40)
    {
-      mp3_play_track(20);  
-      stopCar();        
-      //breakCar();
+      stopCar(); 
       delay(300);
-      mp3_play_track(19);
-      delay(300);  
+      digitalWrite(ledPin1, LOW);
+      delay(300);
+      mp3_play_track(20);            
+      delay(2000);  
       reiknaPulsBreidd(90,-1);
       haegri = lengd();
-      //Serial.println(haegri);
       delay(2000);
       reiknaPulsBreidd(90, 1);
-      delay(1000);
+      delay(2000);
       vinstri = lengd();
-      //Serial.println(vinstri);
+      delay(300);
 
       if(vinstri > haegri) {
         delay(1000);
@@ -100,8 +106,11 @@ void loop()
         driveRight();
         delay(300);
         driveRight();
+      }   
+     } else {
+        digitalWrite(ledPin1, HIGH);
       } 
+    
       startCar();    
-   }
 
 }//End of loop *********************
