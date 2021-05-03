@@ -72,24 +72,26 @@ void loop()
     }
 
 
-   if(lengd()<40)
+   if(lengd() < 30)
    {
       stopCar(); 
       delay(300);
       digitalWrite(ledPin1, LOW);
       delay(300);
       mp3_play_track(20);            
-      delay(2000);  
+      delay(2000); 
+      mp3_play_track(19);
+      delay(300);   
       reiknaPulsBreidd(90,-1);
       haegri = lengd();
-      delay(2000);
+      delay(1000);
       reiknaPulsBreidd(90, 1);
-      delay(2000);
+      delay(1000);
       vinstri = lengd();
       delay(300);
 
       if(vinstri > haegri) {
-        delay(1000);
+        delay(300);
         backCar();
         delay(300);
         backCar();
@@ -98,7 +100,7 @@ void loop()
         delay(300);
         driveLeft(); 
       } else if(haegri > vinstri) {
-        delay(1000);
+        delay(300);
         backCar();
         delay(300);
         backCar();
